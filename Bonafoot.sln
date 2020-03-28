@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bonafoot.Web", "Bonafoot.Web\Bonafoot.Web.csproj", "{6E8BFCDF-DC47-4A73-8635-95C0D5415BB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bonafoot.Core", "Bonafoot.Core\Bonafoot.Core.csproj", "{3AF200A9-803B-48CC-A946-A61F7811421D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bonafoot.Infra", "Bonafoot.Infra\Bonafoot.Infra.csproj", "{E65144E4-00F0-4303-B927-2D2413368949}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bonafoot.Domain", "Bonafoot.Domain\Bonafoot.Domain.csproj", "{461FB8FF-4618-4BFC-ABEA-CC8134667343}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bonafoot.Tests", "Bonafoot.Tests\Bonafoot.Tests.csproj", "{9E5547A7-266D-4373-B5DC-D46339153A8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bonafoot.Engine", "Bonafoot.Engine\Bonafoot.Engine.csproj", "{25122617-EF20-4A91-8E70-1F594729F3C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bonafoot.Engine.Tests", "Bonafoot.Engine.Tests\Bonafoot.Engine.Tests.csproj", "{E6B4DEE2-6EFA-433C-8F98-376CFA4564AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E8BFCDF-DC47-4A73-8635-95C0D5415BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E8BFCDF-DC47-4A73-8635-95C0D5415BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E8BFCDF-DC47-4A73-8635-95C0D5415BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E8BFCDF-DC47-4A73-8635-95C0D5415BB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AF200A9-803B-48CC-A946-A61F7811421D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF200A9-803B-48CC-A946-A61F7811421D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF200A9-803B-48CC-A946-A61F7811421D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF200A9-803B-48CC-A946-A61F7811421D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E65144E4-00F0-4303-B927-2D2413368949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E65144E4-00F0-4303-B927-2D2413368949}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E65144E4-00F0-4303-B927-2D2413368949}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E65144E4-00F0-4303-B927-2D2413368949}.Release|Any CPU.Build.0 = Release|Any CPU
+		{461FB8FF-4618-4BFC-ABEA-CC8134667343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{461FB8FF-4618-4BFC-ABEA-CC8134667343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{461FB8FF-4618-4BFC-ABEA-CC8134667343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{461FB8FF-4618-4BFC-ABEA-CC8134667343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E5547A7-266D-4373-B5DC-D46339153A8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E5547A7-266D-4373-B5DC-D46339153A8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E5547A7-266D-4373-B5DC-D46339153A8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E5547A7-266D-4373-B5DC-D46339153A8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25122617-EF20-4A91-8E70-1F594729F3C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25122617-EF20-4A91-8E70-1F594729F3C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25122617-EF20-4A91-8E70-1F594729F3C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25122617-EF20-4A91-8E70-1F594729F3C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6B4DEE2-6EFA-433C-8F98-376CFA4564AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6B4DEE2-6EFA-433C-8F98-376CFA4564AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6B4DEE2-6EFA-433C-8F98-376CFA4564AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B4DEE2-6EFA-433C-8F98-376CFA4564AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {57A9BD40-23E3-4A3A-A052-CD0C93561E40}
+	EndGlobalSection
+EndGlobal
