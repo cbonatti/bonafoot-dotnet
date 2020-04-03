@@ -20,6 +20,21 @@ namespace Bonafoot.Domain.Entities
             SetPlayerList(players);
         }
 
+        public Team(string name, IList<Player> players, int moral, string primaryColor, string secondaryColor, int stadiumCap, int ticketPrice)
+            : this(name, players)
+        {
+            Moral = moral;
+            PrimaryColor = primaryColor;
+            SecondaryColor = secondaryColor;
+            StadiumCapacity = stadiumCap;
+            TicketPrice = ticketPrice;
+        }
+
+        public string PrimaryColor { get; private set; }
+        public string SecondaryColor { get; private set; }
+        public int Moral { get; private set; }
+        public int StadiumCapacity { get; private set; }
+        public int TicketPrice { get; private set; }
         public IList<Player> Players { get; private set; }
 
         public Team SetPlayerList(IList<Player> players)

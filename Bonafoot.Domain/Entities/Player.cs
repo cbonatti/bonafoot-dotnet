@@ -16,8 +16,14 @@ namespace Bonafoot.Domain.Entities
             SetPosition(position);
         }
 
+        public Player(string name, int strength, PlayerPosition position, int salary) : this(name, strength, position)
+        {
+            SetSalary(salary);
+        }
+
         public int Strength { get; private set; }
         public PlayerPosition Position { get; private set; }
+        public int Salary { get; private set; }
 
         public Player SetStrength(int strength)
         {
@@ -28,6 +34,12 @@ namespace Bonafoot.Domain.Entities
         public Player SetPosition(PlayerPosition position)
         {
             Position = position;
+            return this;
+        }
+
+        public Player SetSalary(int salary)
+        {
+            Salary = salary;
             return this;
         }
     }
