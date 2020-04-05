@@ -5,6 +5,7 @@ namespace Bonafoot.Domain.Entities
 {
     public class Match : IdentityEntity
     {
+        public int Round { get; set; }
         public Team Home { get; set; }
         public Team Guest { get; set; }
         public IEnumerable<Score> HomeScores { get; set; }

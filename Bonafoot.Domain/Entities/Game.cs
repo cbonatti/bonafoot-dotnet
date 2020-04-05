@@ -15,10 +15,10 @@ namespace Bonafoot.Domain.Entities
         public Team Team { get; private set; }
         public IList<Championship> Championships { get; private set; }
 
-        public Game New()
+        public Game New(string name)
         {
             var championship = new Championship().New();
-
+            SetName(name);
             AddChampionship(championship);
 
             // User is going to take the third stronger team because only advance division the two better teams

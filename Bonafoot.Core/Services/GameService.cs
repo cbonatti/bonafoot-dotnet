@@ -1,23 +1,22 @@
-﻿using Bonafoot.Core.Contracts;
+﻿using Bonafoot.Core.Commands;
+using Bonafoot.Core.Contracts;
 using Bonafoot.Core.Services.Interfaces;
 using Bonafoot.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Bonafoot.Core.Services
 {
     public class GameService : IGameService
     {
-        public GameContract New(string name)
+        public GameContract New(NewGameCommand command)
         {
-            var game = new Game().New();
+            var game = new Game().New(command.Name);
 
-            var contract = new GameContract();
+            var contract = GameContract.ToContract(game, game.Championships.First());
             return contract;
         }
 
-        public GameContract Load(string name)
+        public GameContract Load(LoadGameCommand command)
         {
             var contract = new GameContract();
             return contract;
