@@ -11,9 +11,9 @@ namespace Bonafoot.Web.Controllers
     public class GameController : ControllerBase
     {
         IGameService _gameService;
-        public GameController()
+        public GameController(IGameService gameService)
         {
-            _gameService = new GameService();
+            _gameService = gameService;
         }
 
         [HttpPost]
