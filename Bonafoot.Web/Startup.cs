@@ -1,7 +1,10 @@
 using Bonafoot.Core;
+using Bonafoot.Infra.Data.MongoDb;
+using Bonafoot.Infra.Data.MongoDb.Configs;
+using Bonafoot.Infra.Data.MongoDb.Interfaces;
+using Bonafoot.Infra.Data.MongoDb.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +26,14 @@ namespace Bonafoot.Web
         {
             services.AddControllersWithViews();
             services.RegisterCore();
+            //services.RegisterMongoDb();
+            var config = new ServerConfig();
+            Configuration.Bind(config);
+            var context = new BonafootMongoDbContext(config.MongoDB);
+
+            var repo = new GameRepository(context);
+            services.AddSingleton<IGameRepository>(repo);
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

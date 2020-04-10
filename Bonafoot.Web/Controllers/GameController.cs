@@ -3,6 +3,8 @@ using Bonafoot.Core.Contracts;
 using Bonafoot.Core.Services;
 using Bonafoot.Core.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Bonafoot.Web.Controllers
 {
@@ -16,10 +18,15 @@ namespace Bonafoot.Web.Controllers
             _gameService = gameService;
         }
 
-        [HttpPost]
-        public GameContract Post(NewGameCommand command)
+        public async Task<IEnumerable<GameContract>> GetAll()
         {
-            return _gameService.New(command);
+            return await _gameService.GetAll();
+        }
+
+        [HttpPost]
+        public async Task<GameContract> Post(NewGameCommand command)
+        {
+            return await _gameService.New(command);
         }
     }
 }

@@ -1,11 +1,14 @@
 ﻿using Bonafoot.Core.Commands;
 using Bonafoot.Core.Contracts;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Bonafoot.Core.Services.Interfaces
 {
     public interface IGameService
     {
-        GameContract New(NewGameCommand command);
-        GameContract Load(LoadGameCommand command);
+        Task<GameContract> New(NewGameCommand command);
+        Task<GameContract> Load(LoadGameCommand command);
+        Task<IEnumerable<GameContract>> GetAll();
     }
 }
