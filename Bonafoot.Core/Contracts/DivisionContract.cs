@@ -6,7 +6,7 @@ namespace Bonafoot.Core.Contracts
 {
     public class DivisionContract
     {
-        public StandingContract Standing { get; set; }
+        public IEnumerable<StandingContract> Standing { get; set; }
         public IEnumerable<TeamContract> Teams { get; set; }
 
         public static DivisionContract ToContract(Division division)
@@ -15,7 +15,7 @@ namespace Bonafoot.Core.Contracts
                 return null;
             return new DivisionContract()
             {
-                Standing = StandingContract.ToContract(division.Standing),
+                Standing = division.Standings.Select(StandingContract.ToContract),
                 Teams = division.Teams.Select(TeamContract.ToContract).ToList()
             };
         }

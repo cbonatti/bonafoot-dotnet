@@ -26,20 +26,22 @@ namespace Bonafoot.Core.Services
 
             await _gameRepository.Create(gameMongo);
 
-            var contract = GameContract.ToContract(game, game.Championships.First());
+            var contract = GameContract.ToContract(game);
             return contract;
         }
 
         public async Task<GameContract> Load(LoadGameCommand command)
         {
             var game = await _gameRepository.Get(command.Name);
-            return GameContract.ToContract(game.Game, game.Game.Championships.FirstOrDefault());
+            return GameContract.ToContract(game.Game);
         }
+
+        public async Task<GameMongoDb> Get(LoadGameCommand command) => await _gameRepository.Get(command.Name);
 
         public async Task<IEnumerable<GameContract>> GetAll()
         {
             var games = await _gameRepository.GetAll();
-            return games.Select(x => GameContract.ToContract(x.Game, x.Game.Championships.FirstOrDefault())).ToList();
+            return games.Select(x => GameContract.ToContract(x.Game)).ToList();
         }
     }
 }

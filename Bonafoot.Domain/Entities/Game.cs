@@ -38,5 +38,7 @@ namespace Bonafoot.Domain.Entities
             Championships.Add(championship);
             return this;
         }
+
+        public Championship GetActiveChampionship() => Championships.FirstOrDefault(x => x.Status == ChampionshipStatus.Active);
     }
 }

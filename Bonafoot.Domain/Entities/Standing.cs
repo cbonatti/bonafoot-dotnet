@@ -4,6 +4,16 @@ namespace Bonafoot.Domain.Entities
 {
     public class Standing : EntityBase
     {
+        public Standing()
+        {
+        }
+
+        public Standing(Team team)
+        {
+            Team = team;
+            SetName(team.Name);
+        }
+
         public Team Team { get; private set; }
         public int Victory { get; private set; }
         public int Draw { get; private set; }

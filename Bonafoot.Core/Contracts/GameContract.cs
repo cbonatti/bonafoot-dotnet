@@ -8,7 +8,7 @@ namespace Bonafoot.Core.Contracts
         public TeamContract Team { get; set; }
         public ChampionshipContract Championship { get; set; }
 
-        public static GameContract ToContract(Game game, Championship championship)
+        public static GameContract ToContract(Game game)
         {
             if (game == null)
                 return null;
@@ -16,7 +16,7 @@ namespace Bonafoot.Core.Contracts
             {
                 Name = game.Name,
                 Team = TeamContract.ToContract(game.Team),
-                Championship = ChampionshipContract.ToContract(championship)
+                Championship = ChampionshipContract.ToContract(game.GetActiveChampionship())
             };
         }
     }
