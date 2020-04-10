@@ -1,33 +1,31 @@
 ﻿using Bonafoot.Engine.Enums;
 using Bonafoot.Engine.Interfaces;
-using Bonafoot.Engine.Services;
 
 namespace Bonafoot.Engine
 {
     public class MatchEngine : IMatchEngine
     {
-        private readonly MatchResult Result;
+        private MatchResult Result;
         private readonly IRandomService randomService;
         private readonly Combat combat;
 
         public BallPosition BallPosition { get; private set; } = BallPosition.Center;
 
-        public MatchEngine(Match match)
-        {
-            Result = new MatchResult(match);
-
-            randomService = new RandomService();
-            combat = new Combat(randomService);
-        }
-
-        public MatchEngine(Match match, IRandomService service) : this(match)
+        public MatchEngine(IRandomService service)
         {
             randomService = service;
             combat = new Combat(randomService);
         }
 
-        public MatchResult PlayGame()
+        public MatchEngine SetMatch(Match match)
         {
+            Result = new MatchResult(match);
+            return this;
+        }
+
+        public MatchResult PlayGame(Match match)
+        {
+            Result = new MatchResult(match);
             BallPosition = BallPosition.Center;
 
             for (int i = 0; i <= 90; i++)

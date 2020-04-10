@@ -28,7 +28,7 @@ namespace Bonafoot.Web
 
             services.AddControllersWithViews();
             services.RegisterCore();
-            //services.RegisterEngine();
+            services.RegisterEngine();
             services.RegisterMongoDb(config);
 
             // In production, the Angular files will be served from this directory

@@ -1,4 +1,5 @@
 ﻿using Bonafoot.Domain.Entities;
+using Bonafoot.Engine.Interfaces;
 
 namespace Bonafoot.Engine
 {
@@ -13,6 +14,6 @@ namespace Bonafoot.Engine
         public Team HomeTeam { get; private set; }
         public Team GuestTeam { get; private set; }
 
-        public MatchResult Play() => new MatchEngine(this).PlayGame();
+        public MatchResult Play(IRandomService service) => new MatchEngine(service).PlayGame(this);
     }
 }

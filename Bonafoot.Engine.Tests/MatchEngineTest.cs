@@ -28,7 +28,7 @@ namespace Bonafoot.Engine.Tests
             var guest = new Team("", new List<Player>() { new Player("", 9, PlayerPosition.Midfielder) });
 
             var match = new Match(home, guest);
-            var engine = new MatchEngine(match, randomService);
+            var engine = new MatchEngine(randomService).SetMatch(match);
             engine.MidVsMid();
             engine.BallPosition.Should().Be(BallPosition.GuestMid);
         }
@@ -40,7 +40,7 @@ namespace Bonafoot.Engine.Tests
             var guest = new Team("", new List<Player>() { new Player("", 11, PlayerPosition.Midfielder) });
 
             var match = new Match(home, guest);
-            var engine = new MatchEngine(match, randomService);
+            var engine = new MatchEngine(randomService).SetMatch(match);
             engine.MidVsMid();
             engine.BallPosition.Should().Be(BallPosition.HomeMid);
         }
@@ -52,7 +52,7 @@ namespace Bonafoot.Engine.Tests
             var guest = new Team("", new List<Player>() { new Player("", 10, PlayerPosition.Midfielder) });
 
             var match = new Match(home, guest);
-            var engine = new MatchEngine(match, randomService);
+            var engine = new MatchEngine(randomService).SetMatch(match);
             engine.MidVsMid();
             engine.BallPosition.Should().Be(BallPosition.Center);
         }
@@ -64,7 +64,7 @@ namespace Bonafoot.Engine.Tests
             var guest = new Team("", new List<Player>() { new Player("", 11, PlayerPosition.Defender) });
 
             var match = new Match(home, guest);
-            var engine = new MatchEngine(match, randomService);
+            var engine = new MatchEngine(randomService).SetMatch(match);
             engine.HomeMidVsDef();
             engine.BallPosition.Should().Be(BallPosition.Center);
         }
@@ -76,7 +76,7 @@ namespace Bonafoot.Engine.Tests
             var guest = new Team("", new List<Player>() { new Player("", 9, PlayerPosition.Defender) });
 
             var match = new Match(home, guest);
-            var engine = new MatchEngine(match, randomService);
+            var engine = new MatchEngine(randomService).SetMatch(match);
             engine.HomeMidVsDef();
             engine.BallPosition.Should().Be(BallPosition.GuestDef);
         }
@@ -88,7 +88,7 @@ namespace Bonafoot.Engine.Tests
             var guest = new Team("", new List<Player>() { new Player("", 11, PlayerPosition.Goalkeeper) });
 
             var match = new Match(home, guest);
-            var engine = new MatchEngine(match, randomService);
+            var engine = new MatchEngine(randomService).SetMatch(match);
             engine.HomeStVsGk();
             engine.BallPosition.Should().Be(BallPosition.GuestMid);
         }
@@ -100,7 +100,7 @@ namespace Bonafoot.Engine.Tests
             var guest = new Team("", new List<Player>() { new Player("", 9, PlayerPosition.Goalkeeper) });
 
             var match = new Match(home, guest);
-            var engine = new MatchEngine(match, randomService);
+            var engine = new MatchEngine(randomService).SetMatch(match);
             engine.HomeStVsGk();
             engine.BallPosition.Should().Be(BallPosition.Center);
         }
@@ -112,7 +112,7 @@ namespace Bonafoot.Engine.Tests
             var guest = new Team("", new List<Player>() { new Player("", 9, PlayerPosition.Midfielder) });
 
             var match = new Match(home, guest);
-            var engine = new MatchEngine(match, randomService);
+            var engine = new MatchEngine(randomService).SetMatch(match);
             engine.GuestMidVsDef();
             engine.BallPosition.Should().Be(BallPosition.Center);
         }
@@ -124,7 +124,7 @@ namespace Bonafoot.Engine.Tests
             var guest = new Team("", new List<Player>() { new Player("", 11, PlayerPosition.Midfielder) });
 
             var match = new Match(home, guest);
-            var engine = new MatchEngine(match, randomService);
+            var engine = new MatchEngine(randomService).SetMatch(match);
             engine.GuestMidVsDef();
             engine.BallPosition.Should().Be(BallPosition.HomeDef);
         }
@@ -136,7 +136,7 @@ namespace Bonafoot.Engine.Tests
             var guest = new Team("", new List<Player>() { new Player("", 9, PlayerPosition.Striker) });
 
             var match = new Match(home, guest);
-            var engine = new MatchEngine(match, randomService);
+            var engine = new MatchEngine(randomService).SetMatch(match);
             engine.GuestStVsGk();
             engine.BallPosition.Should().Be(BallPosition.HomeMid);
         }
@@ -148,7 +148,7 @@ namespace Bonafoot.Engine.Tests
             var guest = new Team("", new List<Player>() { new Player("", 11, PlayerPosition.Striker) });
 
             var match = new Match(home, guest);
-            var engine = new MatchEngine(match, randomService);
+            var engine = new MatchEngine(randomService).SetMatch(match);
             engine.GuestStVsGk();
             engine.BallPosition.Should().Be(BallPosition.Center);
         }
@@ -172,7 +172,7 @@ namespace Bonafoot.Engine.Tests
             });
 
             var match = new Match(home, guest);
-            var result = match.Play();
+            var result = match.Play(randomService);
             result.Result.Should().Be(CombatResult.HomeWins);
         }
 
@@ -195,7 +195,7 @@ namespace Bonafoot.Engine.Tests
             });
 
             var match = new Match(home, guest);
-            var result = match.Play();
+            var result = match.Play(randomService);
             result.Result.Should().Be(CombatResult.GuestWins);
         }
     }

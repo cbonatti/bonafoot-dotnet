@@ -2,6 +2,7 @@
 {
     public interface IMatchEngine
     {
-        MatchResult PlayGame();
+        MatchResult PlayGame(Match match);
+        MatchEngine SetMatch(Match match);
     }
 }
