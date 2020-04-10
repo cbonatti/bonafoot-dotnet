@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Bonafoot.Engine.Interfaces;
+using System;
 
-namespace Bonafoot.Engine.Interfaces
+namespace Bonafoot.Engine.Services
 {
-    public interface IRandomService
-    {
-        double Generate(int min, int max);
-    }
-
     public class RandomService : IRandomService
     {
         public double Generate(int min, int max)

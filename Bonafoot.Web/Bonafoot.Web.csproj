@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bonafoot.Core\Bonafoot.Core.csproj" />
+    <ProjectReference Include="..\Bonafoot.Engine\Bonafoot.Engine.csproj" />
     <ProjectReference Include="..\Bonafoot.Infra\Bonafoot.Infra.csproj" />
   </ItemGroup>
 

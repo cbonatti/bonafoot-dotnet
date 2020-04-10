@@ -1,4 +1,5 @@
 using Bonafoot.Core;
+using Bonafoot.Engine;
 using Bonafoot.Infra.Data.MongoDb;
 using Bonafoot.Infra.Data.MongoDb.Configs;
 using Microsoft.AspNetCore.Builder;
@@ -22,10 +23,12 @@ namespace Bonafoot.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            services.RegisterCore();
             var config = new ServerConfig();
             Configuration.Bind(config);
+
+            services.AddControllersWithViews();
+            services.RegisterCore();
+            //services.RegisterEngine();
             services.RegisterMongoDb(config);
 
             // In production, the Angular files will be served from this directory
