@@ -43,5 +43,7 @@ namespace Bonafoot.Core.Services
             var games = await _gameRepository.GetAll();
             return games.Select(x => GameContract.ToContract(x.Game)).ToList();
         }
+
+        public async Task<bool> Delete(DeleteGameCommand command) => await _gameRepository.Delete(command.Name);
     }
 }

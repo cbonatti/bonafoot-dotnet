@@ -9,10 +9,12 @@ namespace Bonafoot.Infra.Data.MongoDb
     {
         private readonly IMongoDatabase _db;
 
-        public BonafootMongoDbContext(MongoDBConfig config)
+        public static MongoDBConfig Config { get; set; }
+
+        public BonafootMongoDbContext()
         {
-            var client = new MongoClient(config.ConnectionString);
-            _db = client.GetDatabase(config.Database);
+            var client = new MongoClient(Config.ConnectionString);
+            _db = client.GetDatabase(Config.Database);
         }
 
         public IMongoCollection<GameMongoDb> Games => _db.GetCollection<GameMongoDb>("Games");

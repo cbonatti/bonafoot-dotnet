@@ -10,5 +10,6 @@ namespace Bonafoot.Core.Services.Interfaces
         Task<GameContract> New(NewGameCommand command);
         Task<GameContract> Load(LoadGameCommand command);
         Task<IEnumerable<GameContract>> GetAll();
+        Task<bool> Delete(DeleteGameCommand command);
     }
 }

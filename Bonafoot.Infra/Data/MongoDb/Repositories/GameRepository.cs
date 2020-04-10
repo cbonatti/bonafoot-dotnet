@@ -70,6 +70,16 @@ namespace Bonafoot.Infra.Data.MongoDb.Repositories
                 && deleteResult.DeletedCount > 0;
         }
 
+        public async Task<bool> Delete(string name)
+        {
+            FilterDefinition<GameMongoDb> filter = Builders<GameMongoDb>.Filter.Eq(m => m.Game.Name, name);
+            DeleteResult deleteResult = await _context
+                                                .Games
+                                              .DeleteOneAsync(filter);
+            return deleteResult.IsAcknowledged
+                && deleteResult.DeletedCount > 0;
+        }
+
         public async Task<long> GetNextId()
         {
             return await _context.Games.CountDocumentsAsync(new BsonDocument()) + 1;

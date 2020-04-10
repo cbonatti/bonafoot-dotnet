@@ -13,6 +13,7 @@ namespace Bonafoot.Infra.Data.MongoDb.Interfaces
         Task Create(GameMongoDb todo);
         Task<bool> Update(GameMongoDb todo);
         Task<bool> Delete(Guid id);
+        Task<bool> Delete(string name);
         Task<long> GetNextId();
     }
 }
