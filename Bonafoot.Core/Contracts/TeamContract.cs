@@ -30,5 +30,18 @@ namespace Bonafoot.Core.Contracts
                 Players = team.Players.Select(PlayerContract.ToContract).ToList()
             };
         }
+
+        public static TeamContract ToSimpleContract(Team team)
+        {
+            if (team == null)
+                return null;
+            return new TeamContract()
+            {
+                Id = team.Id,
+                Name = team.Name,
+                PrimaryColor = team.PrimaryColor,
+                SecondaryColor = team.SecondaryColor
+            };
+        }
     }
 }

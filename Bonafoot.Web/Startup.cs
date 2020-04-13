@@ -1,4 +1,5 @@
 using Bonafoot.Core;
+using Bonafoot.Domain.Entities;
 using Bonafoot.Engine;
 using Bonafoot.Infra.Data.MongoDb;
 using Bonafoot.Infra.Data.MongoDb.Configs;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MongoDB.Bson.Serialization;
 
 namespace Bonafoot.Web
 {
@@ -25,6 +27,12 @@ namespace Bonafoot.Web
         {
             var config = new ServerConfig();
             Configuration.Bind(config);
+
+            //BsonClassMap.RegisterClassMap<Team>(cm =>
+            //{
+            //    cm.AutoMap();
+            //    cm.UnmapMember(c => c.PlayingPlayers);
+            //});
 
             services.AddControllersWithViews();
             services.RegisterCore();

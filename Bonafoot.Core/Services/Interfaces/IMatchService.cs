@@ -1,10 +1,11 @@
 ﻿using Bonafoot.Core.Commands;
 using Bonafoot.Core.Contracts;
+using System.Threading.Tasks;
 
 namespace Bonafoot.Core.Services.Interfaces
 {
     public interface IMatchService
     {
-        ChampionshipContract Play(PlayMatchCommand command);
+        Task<ChampionshipContract> Play(PlayMatchCommand command);
     }
 }

@@ -25,5 +25,20 @@ namespace Bonafoot.Core.Contracts
                 Victory = standing.Victory
             };
         }
+
+        public static StandingContract ToSimpleContract(Standing standing)
+        {
+            if (standing == null)
+                return null;
+            return new StandingContract()
+            {
+                Team = TeamContract.ToSimpleContract(standing.Team),
+                Draw = standing.Draw,
+                Loss = standing.Loss,
+                ScoresCon = standing.ScoresCon,
+                ScoresPro = standing.ScoresPro,
+                Victory = standing.Victory
+            };
+        }
     }
 }

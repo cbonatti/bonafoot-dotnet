@@ -17,7 +17,7 @@ namespace Bonafoot.Web.Controllers
         [HttpGet]
         public async Task<IEnumerable<GameContract>> GetAll() => await _gameService.GetAll();
 
-        [HttpGet]
+        [HttpGet, Route("load")]
         public async Task<GameContract> Get(string name) => await _gameService.Load(new LoadGameCommand() { Name = name });
 
         [HttpPost]
