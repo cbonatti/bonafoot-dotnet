@@ -28,11 +28,11 @@ namespace Bonafoot.Web
             var config = new ServerConfig();
             Configuration.Bind(config);
 
-            //BsonClassMap.RegisterClassMap<Team>(cm =>
-            //{
-            //    cm.AutoMap();
-            //    cm.UnmapMember(c => c.PlayingPlayers);
-            //});
+            BsonClassMap.RegisterClassMap<Team>(cm =>
+            {
+                cm.AutoMap();
+                cm.UnmapMember(c => c.PlayingPlayers);
+            });
 
             services.AddControllersWithViews();
             services.RegisterCore();

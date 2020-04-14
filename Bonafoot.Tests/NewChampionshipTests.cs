@@ -24,6 +24,7 @@ namespace Bonafoot.Tests
             championship.Year.Should().Be(DateTime.Now.Year);
             championship.Matches.Count().Should().Be(0);
             championship.Divisions.Count().Should().Be(4);
+            championship.Rounds.Count.Should().Be(224); // division has 8 teams, each round has 4 games, so ((4 games * 7 rounds) * 4 divisions) * 2 return
         }
 
         [Test]

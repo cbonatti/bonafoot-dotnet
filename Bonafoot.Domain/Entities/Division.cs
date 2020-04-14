@@ -11,7 +11,7 @@ namespace Bonafoot.Domain.Entities
         public Division(DivisionIndex index)
         {
             Index = index;
-            Teams = LoadTeam(index);
+            Teams = LoadTeam(index).ToList();
             Standings = NewStandings();
         }
 

@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bonafoot.Domain\Bonafoot.Domain.csproj" />
+    <ProjectReference Include="..\Bonafoot.Engine\Bonafoot.Engine.csproj" />
     <ProjectReference Include="..\Bonafoot.Infra\Bonafoot.Infra.csproj" />
   </ItemGroup>
 

@@ -20,6 +20,9 @@ namespace Bonafoot.Core.Validators
                                                 .Select(x => new { Position = x.Key, Count = x.Count() })
                                                 .ToList();
 
+            if (playersCountByPosition.Sum(x => x.Count) != 11)
+                return false;
+
             // must have only one GK
             var gk = playersCountByPosition.FirstOrDefault(x => x.Position == PlayerPosition.Goalkeeper);
             if (gk == null || gk.Count != 1)
