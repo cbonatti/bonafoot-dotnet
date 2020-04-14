@@ -21,12 +21,19 @@ namespace Bonafoot.Core.Contracts
             return new ChampionshipContract()
             {
                 Year = championship.Year,
-                First = DivisionContract.ToContract(championship.Divisions.FirstOrDefault(x => x.Index == DivisionIndex.First)),
-                Second = DivisionContract.ToContract(championship.Divisions.FirstOrDefault(x => x.Index == DivisionIndex.Second)),
-                Third = DivisionContract.ToContract(championship.Divisions.FirstOrDefault(x => x.Index == DivisionIndex.Third)),
-                Fourth = DivisionContract.ToContract(championship.Divisions.FirstOrDefault(x => x.Index == DivisionIndex.Fourth)),
+                First = GetDivision(championship, DivisionIndex.First),
+                Second = GetDivision(championship, DivisionIndex.Second),
+                Third = GetDivision(championship, DivisionIndex.Third),
+                Fourth = GetDivision(championship, DivisionIndex.Fourth),
                 Matches = championship.Matches.Select(MatchContract.ToContract).ToList()
             };
+        }
+
+        private static DivisionContract GetDivision(Championship championship, DivisionIndex index)
+        {
+            var division = championship.Divisions.FirstOrDefault(x => x.Index == index);
+            var rounds = championship.Rounds.Where(x => x.Division == index).Select(ChampionshipRoundContract.ToContract).ToList();
+            return DivisionContract.ToContract(division, rounds);
         }
     }
 }
