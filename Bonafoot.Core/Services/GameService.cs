@@ -30,6 +30,14 @@ namespace Bonafoot.Core.Services
             return contract;
         }
 
+        public async Task<GameContract> Update(GameMongoDb game)
+        {
+            await _gameRepository.Update(game);
+
+            var contract = GameContract.ToContract(game.Game);
+            return contract;
+        }
+
         public async Task<GameContract> Load(LoadGameCommand command)
         {
             var game = await _gameRepository.Get(command.Name);

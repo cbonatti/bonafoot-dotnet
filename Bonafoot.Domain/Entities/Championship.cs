@@ -16,7 +16,7 @@ namespace Bonafoot.Domain.Entities
 
         public int Year { get; private set; }
         public IList<Division> Divisions { get; private set; }
-        public IEnumerable<Match> Matches { get; private set; }
+        public IList<Match> Matches { get; private set; }
         public ChampionshipStatus Status { get; private set; }
         public int ActualRound { get; private set; }
         public IList<ChampionshipRound> Rounds { get; private set; }
@@ -52,6 +52,14 @@ namespace Bonafoot.Domain.Entities
         }
 
         public IList<ChampionshipRound> GetActualRound() => Rounds.Where(x => x.Round == ActualRound).ToList();
+
+        public Championship AddMatch(Match match)
+        {
+            Matches.Add(match);
+            return this;
+        }
+
+        public Division GetDivision(DivisionIndex index) => Divisions.FirstOrDefault(x => x.Index == index);
 
         // TODO: Should I extract this methods (AddRound, GenerateRounds, GenerateReturnRounds) to another class? Or generating rounds is championship obligation?
         private bool AddRound(Team home, Team guest, int round, DivisionIndex division)

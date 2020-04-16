@@ -2,6 +2,9 @@
 using Bonafoot.Core.Contracts;
 using Bonafoot.Core.Services.Interfaces;
 using Bonafoot.Core.Validators.Interfaces;
+using Bonafoot.Domain.Entities;
+using Bonafoot.Domain.Enums;
+using Bonafoot.Engine;
 using Bonafoot.Engine.Interfaces;
 using System;
 using System.Threading.Tasks;
@@ -13,12 +16,15 @@ namespace Bonafoot.Core.Services
         private readonly IGameMongoDbService _mongoDbService;
         private readonly IMatchEngine _engine;
         private readonly IPlayingTeamValidator _playingTeamValidator;
+        private readonly IGameService _gameService;
+        private Championship _championship;
 
-        public MatchService(IGameMongoDbService mongoDbService, IMatchEngine engine, IPlayingTeamValidator playingTeamValidator)
+        public MatchService(IGameMongoDbService mongoDbService, IMatchEngine engine, IPlayingTeamValidator playingTeamValidator, IGameService gameService)
         {
             _mongoDbService = mongoDbService;
             _engine = engine;
             _playingTeamValidator = playingTeamValidator;
+            _gameService = gameService;
         }
 
         public async Task<ChampionshipContract> Play(PlayMatchCommand command)
@@ -29,20 +35,48 @@ namespace Bonafoot.Core.Services
                 throw new ArgumentException("Invalid Formation"); // TODO: return a Result object with message
 
             game.Team.SetPlayerList(command.Players);
-            var champ = game.GetActiveChampionship();
-            var rounds = champ.GetActualRound();
+            _championship = game.GetActiveChampionship();
+            var rounds = _championship.GetActualRound();
 
             foreach (var round in rounds)
             {
                 round.HomeTeam.GetTeamReadyToPlay(game.Team);
                 round.GuestTeam.GetTeamReadyToPlay(game.Team);
 
-                // _engine.PlayGame(new Engine.Match())
+                var match = new Engine.Match(round.HomeTeam, round.GuestTeam);
+                CalculateResult(_engine.PlayGame(match), round.Round, round.Division);
             }
 
-            champ.FinishRound();
+            _championship.FinishRound();
 
-            return new ChampionshipContract();
+            await _gameService.Update(mongoGame);
+
+            return ChampionshipContract.ToContract(_championship);
+        }
+
+        private void CalculateResult(MatchResult result, int round, DivisionIndex divisionIndex)
+        {
+            var resultMatch = result.Match;
+            var match = new Domain.Entities.Match(round, resultMatch.HomeTeam, resultMatch.GuestTeam);
+            // TODO: Add score list 
+            _championship.AddMatch(match);
+
+            var division = _championship.GetDivision(divisionIndex);
+            
+            switch (result.Result)
+            {
+                case Engine.Enums.CombatResult.HomeWins:
+                    division.AlterStandingVictory(resultMatch.HomeTeam, result.HomeGoals, resultMatch.GuestTeam, result.GuestGoals);
+                    break;
+                case Engine.Enums.CombatResult.GuestWins:
+                    division.AlterStandingVictory(resultMatch.GuestTeam, result.GuestGoals, resultMatch.HomeTeam, result.HomeGoals);
+                    break;
+                case Engine.Enums.CombatResult.Draw:
+                    division.AlterStandingDraw(resultMatch.GuestTeam, resultMatch.HomeTeam, result.HomeGoals);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
