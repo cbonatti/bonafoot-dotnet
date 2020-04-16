@@ -2,6 +2,12 @@
 {
     public interface IRandomService
     {
-        double Generate(int min, int max);
+        int Generate(int min, int max);
+        /// <summary>
+        /// Return a number between 1 and 6, like a dice
+        /// </summary>
+        /// <returns></returns>
+        int Dice();
+        int ZeroToMax(int max);
     }
 }

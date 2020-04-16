@@ -1,5 +1,6 @@
 ﻿using Bonafoot.Engine.Interfaces;
 using Bonafoot.Engine.Services;
+using Bonafoot.Engine.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Bonafoot.Engine
@@ -10,6 +11,8 @@ namespace Bonafoot.Engine
         {
             services.AddScoped<IRandomService, RandomService>();
             services.AddScoped<IMatchEngine, MatchEngine>();
+            services.AddScoped<IPlayerScoredService, PlayerScoredService>();
+            services.AddScoped<ICombatService, CombatService>();
         }
     }
 }

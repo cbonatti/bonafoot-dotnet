@@ -84,6 +84,8 @@ namespace Bonafoot.Domain.Entities
         public double MD => PlayingPlayers.Where(x => x.Position == PlayerPosition.Midfielder).Average(x => x.Strength);
         public double ST => PlayingPlayers.Where(x => x.Position == PlayerPosition.Striker).Average(x => x.Strength);
 
+        public IList<Player> GetPlayerByPosition(PlayerPosition position) => PlayingPlayers.Where(x => x.Position == position).OrderBy(x => x.Name).ToList();
+
         public Team ApplyGkFactor(double factor)
         {
             GkFactor = factor;

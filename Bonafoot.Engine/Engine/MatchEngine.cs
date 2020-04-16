@@ -1,5 +1,6 @@
 ﻿using Bonafoot.Engine.Enums;
 using Bonafoot.Engine.Interfaces;
+using Bonafoot.Engine.Services.Interfaces;
 
 namespace Bonafoot.Engine
 {
@@ -7,15 +8,15 @@ namespace Bonafoot.Engine
     {
         private MatchResult Result;
         private int _minute;
-        private readonly IRandomService randomService;
-        private readonly Combat combat;
+        private readonly IPlayerScoredService _playerScoredService;
+        private readonly ICombatService _combatService;
 
         public BallPosition BallPosition { get; private set; } = BallPosition.Center;
 
-        public MatchEngine(IRandomService service)
+        public MatchEngine(IPlayerScoredService playerScoredService, ICombatService combatService)
         {
-            randomService = service;
-            combat = new Combat(randomService);
+            _playerScoredService = playerScoredService;
+            _combatService = combatService;
         }
 
         public MatchEngine SetMatch(Match match)
@@ -26,7 +27,7 @@ namespace Bonafoot.Engine
 
         public MatchResult PlayGame(Match match)
         {
-            Result = new MatchResult(match);
+            SetMatch(match);
             BallPosition = BallPosition.Center;
 
             for (_minute = 0; _minute <= 90; _minute++)
@@ -62,7 +63,7 @@ namespace Bonafoot.Engine
 
         public void MidVsMid()
         {
-            var result = combat.Fight(Result.Match.HomeTeam.MD, Result.Match.GuestTeam.MD);
+            var result = _combatService.Fight(Result.Match.HomeTeam.MD, Result.Match.GuestTeam.MD);
             if (result == CombatResult.HomeWins)
                 BallPosition = BallPosition.GuestMid;
             else if (result == CombatResult.GuestWins)
@@ -71,7 +72,7 @@ namespace Bonafoot.Engine
 
         public void HomeMidVsDef()
         {
-            var result = combat.Fight(Result.Match.HomeTeam.MD, Result.Match.GuestTeam.DF);
+            var result = _combatService.Fight(Result.Match.HomeTeam.MD, Result.Match.GuestTeam.DF);
             if (result == CombatResult.Draw) return;
 
             if (result == CombatResult.HomeWins)
@@ -82,7 +83,7 @@ namespace Bonafoot.Engine
 
         public void GuestMidVsDef()
         {
-            var result = combat.Fight(Result.Match.HomeTeam.DF, Result.Match.GuestTeam.MD);
+            var result = _combatService.Fight(Result.Match.HomeTeam.DF, Result.Match.GuestTeam.MD);
             if (result == CombatResult.Draw) return;
 
             if (result == CombatResult.GuestWins)
@@ -93,13 +94,13 @@ namespace Bonafoot.Engine
 
         public void HomeStVsGk()
         {
-            var result = combat.Fight(Result.Match.HomeTeam.ST, Result.Match.GuestTeam.GK);
+            var result = _combatService.Fight(Result.Match.HomeTeam.ST, Result.Match.GuestTeam.GK);
             if (result == CombatResult.Draw) return;
 
             if (result == CombatResult.HomeWins)
             {
                 BallPosition = BallPosition.Center;
-                Result.HomeTeamScored(_minute, "home"); // TODO: Method to decide who scored
+                Result.HomeTeamScored(_minute, _playerScoredService.WhoScored(Result.Match.HomeTeam));
             }
             else
                 BallPosition = BallPosition.GuestMid;
@@ -107,13 +108,13 @@ namespace Bonafoot.Engine
 
         public void GuestStVsGk()
         {
-            var result = combat.Fight(Result.Match.HomeTeam.GK, Result.Match.GuestTeam.ST);
+            var result = _combatService.Fight(Result.Match.HomeTeam.GK, Result.Match.GuestTeam.ST);
             if (result == CombatResult.Draw) return;
 
             if (result == CombatResult.GuestWins)
             {
                 BallPosition = BallPosition.Center;
-                Result.GuestTeamScored(_minute, "guest");
+                Result.GuestTeamScored(_minute, _playerScoredService.WhoScored(Result.Match.GuestTeam));
             }
             else
                 BallPosition = BallPosition.HomeMid;
