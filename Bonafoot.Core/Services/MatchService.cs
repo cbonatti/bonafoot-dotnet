@@ -23,12 +23,24 @@ namespace Bonafoot.Core.Services
 
         public async Task<ChampionshipContract> Play(PlayMatchCommand command)
         {
-            var game = await _mongoDbService.Get(new LoadGameCommand() { Name = command.Name });
-            if (!_playingTeamValidator.Validate(command, game.Game.Team))
+            var mongoGame = await _mongoDbService.Get(new LoadGameCommand() { Name = command.Name });
+            var game = mongoGame.Game;
+            if (!_playingTeamValidator.Validate(command, game.Team))
                 throw new ArgumentException("Invalid Formation"); // TODO: return a Result object with message
 
-            game.Game.Team.SetPlayerList(command.Players);
-            
+            game.Team.SetPlayerList(command.Players);
+            var champ = game.GetActiveChampionship();
+            var rounds = champ.GetActualRound();
+
+            foreach (var round in rounds)
+            {
+                round.HomeTeam.GetTeamReadyToPlay(game.Team);
+                round.GuestTeam.GetTeamReadyToPlay(game.Team);
+
+                // _engine.PlayGame(new Engine.Match())
+            }
+
+            champ.FinishRound();
 
             return new ChampionshipContract();
         }

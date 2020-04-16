@@ -25,7 +25,7 @@ namespace Bonafoot.Domain.Entities
             Team = championship.Divisions
                         .FirstOrDefault(x => x.Index == DivisionIndex.Fourth)
                         .Teams
-                        .Select(x => new { Team = x, Strength = x.Players.Average(y => y.Strength) })
+                        .Select(x => new { Team = x, Strength = x.Squad.Average(y => y.Strength) })
                         .OrderByDescending(x => x.Strength)
                         .Select(x => x.Team)
                         .ElementAt(3);

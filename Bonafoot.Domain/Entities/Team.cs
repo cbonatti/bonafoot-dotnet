@@ -12,7 +12,7 @@ namespace Bonafoot.Domain.Entities
 
         public Team()
         {
-            Players = new List<Player>();
+            Squad = new List<Player>();
             PlayingPlayers = new List<Player>();
         }
 
@@ -30,7 +30,7 @@ namespace Bonafoot.Domain.Entities
             SecondaryColor = secondaryColor;
             StadiumCapacity = stadiumCap;
             TicketPrice = ticketPrice;
-            Players = players;
+            Squad = players;
         }
 
         public string PrimaryColor { get; private set; }
@@ -38,7 +38,7 @@ namespace Bonafoot.Domain.Entities
         public int Moral { get; private set; }
         public int StadiumCapacity { get; private set; }
         public int TicketPrice { get; private set; }
-        public IList<Player> Players { get; private set; }
+        public IList<Player> Squad { get; private set; }
         public IList<Player> PlayingPlayers { get; private set; }
 
         public Team SetPlayerList(IList<Player> players)
@@ -49,19 +49,33 @@ namespace Bonafoot.Domain.Entities
 
         public Team SetPlayerList(IEnumerable<Guid> players)
         {
-            PlayingPlayers = Players.Where(x => players.Any(y => x.Id == y)).ToList();
+            PlayingPlayers = Squad.Where(x => players.Any(y => x.Id == y)).ToList();
             return this;
         }
 
-        public Team AddPlayer(Player player)
+        public Team AddPlayerToSquad(Player player)
         {
-            Players.Add(player);
+            Squad.Add(player);
             return this;
         }
 
-        public Team RemovePlayer(Player player)
+        public Team RemovePlayerFromSquad(Player player)
         {
-            Players.Remove(player);
+            Squad.Remove(player);
+            return this;
+        }
+
+        /// <summary>
+        /// Used in services to determine wheater playing team is user's team, so I need to set the players he selected
+        /// </summary>
+        /// <param name="team"></param>
+        /// <returns></returns>
+        public Team GetTeamReadyToPlay(Team team)
+        {
+            if (Id == team.Id)
+                SetPlayerList(team.PlayingPlayers);
+            else
+                GenerateTeam();
             return this;
         }
 
@@ -73,6 +87,19 @@ namespace Bonafoot.Domain.Entities
         public Team ApplyGkFactor(double factor)
         {
             GkFactor = factor;
+            return this;
+        }
+
+        private Team GenerateTeam()
+        {
+            // TODO: Generate formation dynamically, for now 4-4-2 is enough
+            var list = Squad
+                            .Where(x => x.Position == PlayerPosition.Goalkeeper).OrderByDescending(x => x.Strength).Take(1)
+                            .Union(Squad.Where(x => x.Position == PlayerPosition.Defender).OrderByDescending(x => x.Strength).Take(4))
+                            .Union(Squad.Where(x => x.Position == PlayerPosition.Midfielder).OrderByDescending(x => x.Strength).Take(4))
+                            .Union(Squad.Where(x => x.Position == PlayerPosition.Striker).OrderByDescending(x => x.Strength).Take(2))
+                            .ToList();
+            SetPlayerList(list);
             return this;
         }
     }

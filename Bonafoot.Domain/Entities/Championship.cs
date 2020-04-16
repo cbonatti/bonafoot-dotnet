@@ -45,6 +45,13 @@ namespace Bonafoot.Domain.Entities
             return this;
         }
 
+        public Championship FinishRound()
+        {
+            ActualRound++;
+            return this;
+        }
+
+        public IList<ChampionshipRound> GetActualRound() => Rounds.Where(x => x.Round == ActualRound).ToList();
 
         // TODO: Should I extract this methods (AddRound, GenerateRounds, GenerateReturnRounds) to another class? Or generating rounds is championship obligation?
         private bool AddRound(Team home, Team guest, int round, DivisionIndex division)

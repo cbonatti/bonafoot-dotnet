@@ -35,8 +35,8 @@ namespace Bonafoot.Tests
             var first = championship.Divisions.FirstOrDefault();
             first.Index.Should().Be(DivisionIndex.First);
             first.Teams.Count().Should().Be(8);
-            first.Teams.FirstOrDefault().Players.Count.Should().Be(15);
-            first.Teams.FirstOrDefault().Players.Average(x => x.Strength)
+            first.Teams.FirstOrDefault().Squad.Count.Should().Be(15);
+            first.Teams.FirstOrDefault().Squad.Average(x => x.Strength)
                     .Should()
                     .BeGreaterOrEqualTo(param.MinStrength)
                     .And
@@ -51,8 +51,8 @@ namespace Bonafoot.Tests
             var fourth = championship.Divisions.LastOrDefault();
             fourth.Index.Should().Be(DivisionIndex.Fourth);
             fourth.Teams.Count().Should().Be(8);
-            fourth.Teams.FirstOrDefault().Players.Count.Should().Be(15);
-            fourth.Teams.FirstOrDefault().Players.Average(x => x.Strength)
+            fourth.Teams.FirstOrDefault().Squad.Count.Should().Be(15);
+            fourth.Teams.FirstOrDefault().Squad.Average(x => x.Strength)
                     .Should()
                     .BeGreaterOrEqualTo(param.MinStrength)
                     .And

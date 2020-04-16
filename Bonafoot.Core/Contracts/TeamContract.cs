@@ -12,7 +12,7 @@ namespace Bonafoot.Core.Contracts
         public int Moral { get; set; }
         public int StadiumCapacity { get; set; }
         public int TicketPrice { get; set; }
-        public IList<PlayerContract> Players { get; set; }
+        public IList<PlayerContract> Squad { get; set; }
 
         public static TeamContract ToContract(Team team)
         {
@@ -27,7 +27,7 @@ namespace Bonafoot.Core.Contracts
                 SecondaryColor = team.SecondaryColor,
                 StadiumCapacity = team.StadiumCapacity,
                 TicketPrice = team.TicketPrice,
-                Players = team.Players.Select(PlayerContract.ToContract).ToList()
+                Squad = team.Squad.Select(PlayerContract.ToContract).ToList()
             };
         }
 

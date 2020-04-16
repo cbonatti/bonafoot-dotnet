@@ -25,14 +25,14 @@ namespace Bonafoot.Tests
         [Test]
         public void Should_Not_Validade_10_Players()
         {
-            var command = new PlayMatchCommand() { Players = _team.Players.Take(10).Select(x => x.Id).ToList() };
+            var command = new PlayMatchCommand() { Players = _team.Squad.Take(10).Select(x => x.Id).ToList() };
             _validator.Validate(command, _team).Should().BeFalse();
         }
 
         [Test]
         public void Should_Not_Validade_12_Players()
         {
-            var command = new PlayMatchCommand() { Players = _team.Players.Take(12).Select(x => x.Id).ToList() };
+            var command = new PlayMatchCommand() { Players = _team.Squad.Take(12).Select(x => x.Id).ToList() };
             _validator.Validate(command, _team).Should().BeFalse();
         }
 
@@ -42,9 +42,9 @@ namespace Bonafoot.Tests
             var command = new PlayMatchCommand()
             {
                 Players = (
-                    _team.Players.Where(x => x.Position == PlayerPosition.Defender).Take(4)
-                    .Union(_team.Players.Where(x => x.Position == PlayerPosition.Midfielder).Take(4))
-                    .Union(_team.Players.Where(x => x.Position == PlayerPosition.Striker).Take(3))
+                    _team.Squad.Where(x => x.Position == PlayerPosition.Defender).Take(4)
+                    .Union(_team.Squad.Where(x => x.Position == PlayerPosition.Midfielder).Take(4))
+                    .Union(_team.Squad.Where(x => x.Position == PlayerPosition.Striker).Take(3))
                     .Select(x => x.Id)
                 ).ToList()
             };
@@ -58,10 +58,10 @@ namespace Bonafoot.Tests
             var command = new PlayMatchCommand()
             {
                 Players = (
-                    _team.Players.Where(x => x.Position == PlayerPosition.Goalkeeper).Take(2)
-                    .Union(_team.Players.Where(x => x.Position == PlayerPosition.Defender).Take(4))
-                    .Union(_team.Players.Where(x => x.Position == PlayerPosition.Midfielder).Take(4))
-                    .Union(_team.Players.Where(x => x.Position == PlayerPosition.Striker).Take(1))
+                    _team.Squad.Where(x => x.Position == PlayerPosition.Goalkeeper).Take(2)
+                    .Union(_team.Squad.Where(x => x.Position == PlayerPosition.Defender).Take(4))
+                    .Union(_team.Squad.Where(x => x.Position == PlayerPosition.Midfielder).Take(4))
+                    .Union(_team.Squad.Where(x => x.Position == PlayerPosition.Striker).Take(1))
                     .Select(x => x.Id)
                 ).ToList()
             };
@@ -75,10 +75,10 @@ namespace Bonafoot.Tests
             var command = new PlayMatchCommand()
             {
                 Players = (
-                    _team.Players.Where(x => x.Position == PlayerPosition.Goalkeeper).Take(1)
-                    .Union(_team.Players.Where(x => x.Position == PlayerPosition.Defender).Take(4))
-                    .Union(_team.Players.Where(x => x.Position == PlayerPosition.Midfielder).Take(4))
-                    .Union(_team.Players.Where(x => x.Position == PlayerPosition.Striker).Take(2))
+                    _team.Squad.Where(x => x.Position == PlayerPosition.Goalkeeper).Take(1)
+                    .Union(_team.Squad.Where(x => x.Position == PlayerPosition.Defender).Take(4))
+                    .Union(_team.Squad.Where(x => x.Position == PlayerPosition.Midfielder).Take(4))
+                    .Union(_team.Squad.Where(x => x.Position == PlayerPosition.Striker).Take(2))
                     .Select(x => x.Id)
                 ).ToList()
             };
