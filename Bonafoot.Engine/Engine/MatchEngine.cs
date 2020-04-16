@@ -6,6 +6,7 @@ namespace Bonafoot.Engine
     public class MatchEngine : IMatchEngine
     {
         private MatchResult Result;
+        private int _minute;
         private readonly IRandomService randomService;
         private readonly Combat combat;
 
@@ -28,10 +29,9 @@ namespace Bonafoot.Engine
             Result = new MatchResult(match);
             BallPosition = BallPosition.Center;
 
-            for (int i = 0; i <= 90; i++)
-            {
-                Play();
-            }
+            for (_minute = 0; _minute <= 90; _minute++)
+                for (int play = 0; play < 3; play++) // 3 plays per minute
+                    Play(); 
 
             return Result;
         }
@@ -99,7 +99,7 @@ namespace Bonafoot.Engine
             if (result == CombatResult.HomeWins)
             {
                 BallPosition = BallPosition.Center;
-                Result.HomeTeamScored();
+                Result.HomeTeamScored(_minute, "home"); // TODO: Method to decide who scored
             }
             else
                 BallPosition = BallPosition.GuestMid;
@@ -113,7 +113,7 @@ namespace Bonafoot.Engine
             if (result == CombatResult.GuestWins)
             {
                 BallPosition = BallPosition.Center;
-                Result.GuestTeamScored();
+                Result.GuestTeamScored(_minute, "guest");
             }
             else
                 BallPosition = BallPosition.HomeMid;

@@ -1,11 +1,12 @@
-﻿using Bonafoot.Domain.Entities;
+﻿using Bonafoot.Core.Contracts.Base;
+using Bonafoot.Domain.Entities;
 
 namespace Bonafoot.Core.Contracts
 {
-    public class ScoreContract
+    public class ScoreContract : ContractBase
     {
-        public PlayerContract Player { get; set; }
         public int Minute { get; set; }
+        public bool Home { get; set; }
 
         public static ScoreContract ToContract(Score score)
         {
@@ -14,7 +15,8 @@ namespace Bonafoot.Core.Contracts
             return new ScoreContract()
             {
                 Minute = score.Minute,
-                Player = PlayerContract.ToContract(score.Player)
+                Name = score.Name,
+                Home = score.Home
             };
         }
     }

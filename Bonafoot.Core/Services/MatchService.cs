@@ -7,6 +7,7 @@ using Bonafoot.Domain.Enums;
 using Bonafoot.Engine;
 using Bonafoot.Engine.Interfaces;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Bonafoot.Core.Services
@@ -57,8 +58,7 @@ namespace Bonafoot.Core.Services
         private void CalculateResult(MatchResult result, int round, DivisionIndex divisionIndex)
         {
             var resultMatch = result.Match;
-            var match = new Domain.Entities.Match(round, resultMatch.HomeTeam, resultMatch.GuestTeam);
-            // TODO: Add score list 
+            var match = new Domain.Entities.Match(round, resultMatch.HomeTeam, resultMatch.GuestTeam, result.Scores.Select(x => new Score(x.Minute, x.Name, x.Home)).ToList());
             _championship.AddMatch(match);
 
             var division = _championship.GetDivision(divisionIndex);
