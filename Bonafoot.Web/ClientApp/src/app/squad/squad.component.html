@@ -1,0 +1,23 @@
+<h1>{{game.team.name}}</h1>
+Moral <progress max="100" [value]="game.team.moral"></progress>
+
+<fieldset>
+    <legend>Squad</legend>
+
+    <table class="table table-hover">
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Position</th>
+            <th scope="col">Name</th>
+            <th scope="col">Strength</th>
+            <th scope="col">Salary</th>
+        </tr>
+        <tr *ngFor="let player of game.team.squad">
+            <td><input type="checkbox" [name]="player.name" [id]="player.id"></td>
+            <td>{{getPosition(player.position)}}</td>
+            <td>{{player.name}}</td>
+            <td>{{player.strength}}</td>
+            <td>{{player.salary}}</td>
+        </tr>
+    </table>
+</fieldset>

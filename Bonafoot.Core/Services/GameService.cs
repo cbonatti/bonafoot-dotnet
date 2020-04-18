@@ -49,7 +49,7 @@ namespace Bonafoot.Core.Services
         public async Task<IEnumerable<GameContract>> GetAll()
         {
             var games = await _gameRepository.GetAll();
-            return games.Select(x => GameContract.ToContract(x.Game)).ToList();
+            return games.Select(x => GameContract.ToSimpleContract(x.Game)).ToList();
         }
 
         public async Task<bool> Delete(DeleteGameCommand command) => await _gameRepository.Delete(command.Name);

@@ -19,5 +19,16 @@ namespace Bonafoot.Core.Contracts
                 Championship = ChampionshipContract.ToContract(game.GetActiveChampionship())
             };
         }
+
+        public static GameContract ToSimpleContract(Game game)
+        {
+            if (game == null)
+                return null;
+            return new GameContract()
+            {
+                Name = game.Name,
+                Team = TeamContract.ToSimpleContract(game.Team)
+            };
+        }
     }
 }
