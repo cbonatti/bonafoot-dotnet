@@ -7,6 +7,7 @@ namespace Bonafoot.Core.Contracts
 {
     public class TeamContract : ContractBaseWithId
     {
+        public int Money { get; set; }
         public string PrimaryColor { get; set; }
         public string SecondaryColor { get; set; }
         public int Moral { get; set; }
@@ -22,6 +23,7 @@ namespace Bonafoot.Core.Contracts
             {
                 Id = team.Id,
                 Name = team.Name,
+                Money = team.Money,
                 Moral = team.Moral,
                 PrimaryColor = team.PrimaryColor,
                 SecondaryColor = team.SecondaryColor,
@@ -39,6 +41,7 @@ namespace Bonafoot.Core.Contracts
             {
                 Id = team.Id,
                 Name = team.Name,
+                Money = team.Money,
                 PrimaryColor = team.PrimaryColor,
                 SecondaryColor = team.SecondaryColor
             };

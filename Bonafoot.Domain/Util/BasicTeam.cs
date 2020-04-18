@@ -32,7 +32,7 @@ namespace Bonafoot.Domain.Util
                 new Player("ST 4", random.Next(playerParams.MinStrength, playerParams.MaxStrength), PlayerPosition.Striker, playerParams.Salary),
             };
 
-            return new Team($"Team {index}", players, 50, teamParams.PrimaryColor, teamParams.SecondaryColor, teamParams.StadiumCap, teamParams.TicketPrice);
+            return new Team($"Team {index}", players, teamParams.Money, 50, teamParams.PrimaryColor, teamParams.SecondaryColor, teamParams.StadiumCap, teamParams.TicketPrice);
         }
     }
 }

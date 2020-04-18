@@ -40,7 +40,7 @@ export class GameService {
     }
 
     Load(name: string): Observable<GameModel> {
-        return this.http.get<GameModel>(this.baseurl + '/' + name, this.httpOptions)
+        return this.http.get<GameModel>(this.baseurl + '/load?name=' + name, this.httpOptions)
             .pipe(
                 retry(1),
                 catchError(this.errorHandl)

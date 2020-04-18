@@ -22,7 +22,7 @@ namespace Bonafoot.Domain.Entities
             SetPlayerList(players);
         }
 
-        public Team(string name, IList<Player> players, int moral, string primaryColor, string secondaryColor, int stadiumCap, int ticketPrice)
+        public Team(string name, IList<Player> players, int money, int moral, string primaryColor, string secondaryColor, int stadiumCap, int ticketPrice)
         {
             SetName(name);
             Moral = moral;
@@ -33,6 +33,7 @@ namespace Bonafoot.Domain.Entities
             Squad = players;
         }
 
+        public int Money { get; private set; }
         public string PrimaryColor { get; private set; }
         public string SecondaryColor { get; private set; }
         public int Moral { get; private set; }
@@ -94,12 +95,12 @@ namespace Bonafoot.Domain.Entities
 
         private Team GenerateTeam()
         {
-            // TODO: Generate formation dynamically, for now 4-4-2 is enough
+            // TODO: Generate formation dynamically, for now 4-3-3 is enough
             var list = Squad
                             .Where(x => x.Position == PlayerPosition.Goalkeeper).OrderByDescending(x => x.Strength).Take(1)
                             .Union(Squad.Where(x => x.Position == PlayerPosition.Defender).OrderByDescending(x => x.Strength).Take(4))
-                            .Union(Squad.Where(x => x.Position == PlayerPosition.Midfielder).OrderByDescending(x => x.Strength).Take(4))
-                            .Union(Squad.Where(x => x.Position == PlayerPosition.Striker).OrderByDescending(x => x.Strength).Take(2))
+                            .Union(Squad.Where(x => x.Position == PlayerPosition.Midfielder).OrderByDescending(x => x.Strength).Take(3))
+                            .Union(Squad.Where(x => x.Position == PlayerPosition.Striker).OrderByDescending(x => x.Strength).Take(3))
                             .ToList();
             SetPlayerList(list);
             return this;

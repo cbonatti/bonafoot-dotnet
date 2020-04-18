@@ -6,6 +6,7 @@ namespace Bonafoot.Domain.Util
 {
     public class BasicTeamParam
     {
+        public int Money { get; private set; }
         public string PrimaryColor { get; private set; }
         public string SecondaryColor { get; private set; }
         public int StadiumCap { get; private set; }
@@ -28,18 +29,22 @@ namespace Bonafoot.Domain.Util
                 case DivisionIndex.First:
                     param.TicketPrice = 50;
                     param.StadiumCap = 50000;
+                    param.Money = 5000000;
                     break;
                 case DivisionIndex.Second:
                     param.TicketPrice = 40;
                     param.StadiumCap = 40000;
+                    param.Money = 4700000;
                     break;
                 case DivisionIndex.Third:
                     param.TicketPrice = 30;
                     param.StadiumCap = 30000;
+                    param.Money = 3300000;
                     break;
                 case DivisionIndex.Fourth:
                     param.TicketPrice = 20;
                     param.StadiumCap = 20000;
+                    param.Money = 1500000;
                     break;
                 default:
                     break;
