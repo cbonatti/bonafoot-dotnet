@@ -1,24 +1,52 @@
-<h1>{{game.team.name}}</h1>
-Moral <progress max="100" [value]="game.team.moral"></progress>
-Money {{game.team.money}}
-
-<fieldset>
-    <legend>Squad</legend>
-
-    <table class="table table-hover">
-        <tr>
-            <th scope="col"></th>
-            <th scope="col">Position</th>
-            <th scope="col">Name</th>
-            <th scope="col">Strength</th>
-            <th scope="col">Salary</th>
-        </tr>
-        <tr *ngFor="let player of game.team.squad">
-            <td><input type="checkbox" [name]="player.name" [id]="player.id"></td>
-            <td>{{getPosition(player.position)}}</td>
-            <td>{{player.name}}</td>
-            <td>{{player.strength}}</td>
-            <td>{{player.salary}}</td>
-        </tr>
-    </table>
-</fieldset>
+<h1 *ngIf="team">{{team.name}}</h1>
+<div class="row" *ngIf="team">
+    <div class="col-sm-8">
+        <fieldset>
+            <legend>Squad</legend>
+        
+            <table class="table table-hover table-striped table-borderless table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Position</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Strength</th>
+                        <th scope="col">Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let player of team.squad">
+                        <td><input type="checkbox" [name]="player.name" [id]="player.id" [checked]="player.select" (change)="selectPlayer(player)"></td>
+                        <td>{{getPosition(player.position)}}</td>
+                        <td>{{player.name}}</td>
+                        <td>{{player.strength}}</td>
+                        <td>{{player.salary}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>        
+    </div>
+    <div class="col-sm-4">
+        <fieldset>
+            <legend>{{team.division + 1}}{{getOrderSign(team.division + 1)}} division</legend>
+            <table class="table table-hover table-striped table-borderless table-sm">
+                <tbody>
+                    <tr *ngFor="let item of nextRound">
+                        <td>{{item.position}}{{getOrderSign(item.position)}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.points}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Moral <progress max="100" [value]="team.moral"></progress></p>
+            <p>Money {{team.money}}</p>
+        </fieldset>
+        <div>
+            <div class="col-md-12"><button [disabled]="!checkFormation([4, 4, 2])" (click)="formation([4, 4, 2])">4-4-2</button></div>
+            <div class="col-md-12"><button [disabled]="!checkFormation([4, 3, 3])" (click)="formation([4, 3, 3])">4-3-3</button></div>
+            <div class="col-md-12"><button [disabled]="!checkFormation([5, 3, 2])" (click)="formation([5, 3, 2])">5-3-2</button></div>
+            <div class="col-md-12"><button [disabled]="!checkFormation([3, 5, 2])" (click)="formation([3, 5, 2])">3-5-2</button></div>
+        </div>
+        <div class="col-md-12"><button [disabled]="!canPlay()" class="playButton" (click)="play()">PLAY!</button></div>
+    </div>
+</div>

@@ -11,6 +11,8 @@ namespace Bonafoot.Core
         public static void RegisterCore(this IServiceCollection services)
         {
             services.AddScoped<IGameService, GameService>();
+            services.AddScoped<IMatchService, MatchService>();
+            services.AddScoped<IGameMongoDbService, GameMongoDbService>();
             services.AddScoped<IPlayingTeamValidator, PlayingTeamValidator>();
         }
     }

@@ -11,4 +11,5 @@ export class PlayerModel extends ModelBaseId {
     strength: number;
     position: PlayerPosition;
     salary: number;
+    select: boolean;
 }

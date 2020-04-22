@@ -16,7 +16,7 @@ namespace Bonafoot.Core.Contracts
                 return null;
             return new DivisionContract()
             {
-                Standing = division.Standings.Select(StandingContract.ToSimpleContract),
+                Standing = division.Standings.Select(StandingContract.ToSimpleContract).OrderBy(x => x.Points).ToList(),
                 Teams = division.Teams.Select(TeamContract.ToContract).ToList(),
                 Rounds = rounds
             };

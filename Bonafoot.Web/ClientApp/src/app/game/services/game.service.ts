@@ -48,7 +48,7 @@ export class GameService {
     }
 
     Delete(name: string) {
-        return this.http.delete<GameModel>(this.baseurl + '/' + name, this.httpOptions)
+        return this.http.delete<GameModel>(this.baseurl + '?name=' + name, this.httpOptions)
             .pipe(
                 retry(1),
                 catchError(this.errorHandl)

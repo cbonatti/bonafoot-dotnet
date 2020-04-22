@@ -1,5 +1,6 @@
 import { ModelBaseId } from "./base/model-base-id.model";
 import { PlayerModel } from "./player.model";
+import { DivisionIndex } from "./division.model";
 
 export class TeamModel extends ModelBaseId {
     money: number;
@@ -8,5 +9,6 @@ export class TeamModel extends ModelBaseId {
     moral: number;
     ticketPrice: number;
     stadiumCapacity: number;
+    division: DivisionIndex;
     squad: PlayerModel[];
 }

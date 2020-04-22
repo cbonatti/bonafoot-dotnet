@@ -7,4 +7,5 @@ export class StandingModel {
     loss: number;
     scoresPro: number;
     scoresCon: number;
+    points: number;
 }

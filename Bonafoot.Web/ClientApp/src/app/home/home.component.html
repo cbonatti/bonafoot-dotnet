@@ -17,7 +17,7 @@
     <tr *ngFor="let game of games">
       <td>{{game.name}}</td>
       <td>{{game.team.name}}</td>
-      <td><button (click)="loadGame(game.name)">Load</button></td>
+      <td><button (click)="loadGame(game.name)">Load</button><button (click)="deleteGame(game.name)">Delete</button></td>
     </tr>
   </table>
 </fieldset>

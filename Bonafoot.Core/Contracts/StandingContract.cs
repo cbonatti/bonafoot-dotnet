@@ -10,6 +10,7 @@ namespace Bonafoot.Core.Contracts
         public int Loss { get; set; }
         public int ScoresPro { get; set; }
         public int ScoresCon { get; set; }
+        public int Points { get; set; }
 
         public static StandingContract ToContract(Standing standing)
         {
@@ -22,7 +23,8 @@ namespace Bonafoot.Core.Contracts
                 Loss = standing.Loss,
                 ScoresCon = standing.ScoresCon,
                 ScoresPro = standing.ScoresPro,
-                Victory = standing.Victory
+                Victory = standing.Victory,
+                Points = standing.Points
             };
         }
 
@@ -37,7 +39,8 @@ namespace Bonafoot.Core.Contracts
                 Loss = standing.Loss,
                 ScoresCon = standing.ScoresCon,
                 ScoresPro = standing.ScoresPro,
-                Victory = standing.Victory
+                Victory = standing.Victory,
+                Points = standing.Points
             };
         }
     }

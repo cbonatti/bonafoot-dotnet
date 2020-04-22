@@ -26,6 +26,7 @@ namespace Bonafoot.Domain.Entities
         {
             SetName(name);
             Moral = moral;
+            Money = money;
             PrimaryColor = primaryColor;
             SecondaryColor = secondaryColor;
             StadiumCapacity = stadiumCap;
@@ -85,7 +86,7 @@ namespace Bonafoot.Domain.Entities
         public double MD => PlayingPlayers.Where(x => x.Position == PlayerPosition.Midfielder).Average(x => x.Strength);
         public double ST => PlayingPlayers.Where(x => x.Position == PlayerPosition.Striker).Average(x => x.Strength);
 
-        public IList<Player> GetPlayerByPosition(PlayerPosition position) => PlayingPlayers.Where(x => x.Position == position).OrderBy(x => x.Name).ToList();
+        public IList<Player> GetPlayerByPosition(PlayerPosition position) => PlayingPlayers.Where(x => x.Position == position).OrderBy(x => x.Position).ThenBy(x => x.Name).ToList();
 
         public Team ApplyGkFactor(double factor)
         {

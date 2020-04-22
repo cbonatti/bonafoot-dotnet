@@ -24,6 +24,6 @@ namespace Bonafoot.Web.Controllers
         public async Task<GameContract> Post(NewGameCommand command) => await _gameService.New(command);
 
         [HttpDelete]
-        public async Task<bool> Delete(DeleteGameCommand command) => await _gameService.Delete(command);
+        public async Task<bool> Delete(string name) => await _gameService.Delete(new DeleteGameCommand() { Name = name });
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Bonafoot.Core.Contracts.Base;
 using Bonafoot.Domain.Entities;
+using Bonafoot.Domain.Enums;
+using System.Linq;
 
 namespace Bonafoot.Core.Contracts
 {
@@ -15,7 +17,7 @@ namespace Bonafoot.Core.Contracts
             return new GameContract()
             {
                 Name = game.Name,
-                Team = TeamContract.ToContract(game.Team),
+                Team = TeamContract.ToPlayerContract(game.Team, GetPlayerTeamDivision(game)),
                 Championship = ChampionshipContract.ToContract(game.GetActiveChampionship())
             };
         }
@@ -30,5 +32,7 @@ namespace Bonafoot.Core.Contracts
                 Team = TeamContract.ToSimpleContract(game.Team)
             };
         }
+
+        private static DivisionIndex GetPlayerTeamDivision(Game game) => game.GetActiveChampionship().Divisions.FirstOrDefault(x => x.Teams.Any(y => y.Id == game.Team.Id)).Index;
     }
 }

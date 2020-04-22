@@ -5,6 +5,7 @@ using Bonafoot.Engine.Services;
 using FluentAssertions;
 using NSubstitute;
 using NUnit.Framework;
+using System.Linq;
 
 namespace Bonafoot.Engine.Tests
 {
@@ -23,21 +24,25 @@ namespace Bonafoot.Engine.Tests
         public void Should_Defense_Player_Score()
         {
             var service = new PlayerScoredService(CreateRandomService(1));
-            service.WhoScored(_team).Should().Be("DF 1");
+            // it will get the 4 strongest defending players and then ordering by name
+            var expected = _team.PlayingPlayers.Where(x => x.Position == Domain.Enums.PlayerPosition.Defender).OrderBy(x => x.Strength).Take(4).OrderBy(x => x.Name).FirstOrDefault().Name;
+            service.WhoScored(_team).Should().Be(expected);
         }
 
         [Test]
         public void Should_Midfielder_Player_Score()
         {
             var service = new PlayerScoredService(CreateRandomService(6));
-            service.WhoScored(_team).Should().Be("MF 1");
+            var expected = _team.PlayingPlayers.Where(x => x.Position == Domain.Enums.PlayerPosition.Midfielder).OrderBy(x => x.Strength).Take(3).OrderBy(x => x.Name).FirstOrDefault().Name;
+            service.WhoScored(_team).Should().Be(expected);
         }
 
         [Test]
         public void Should_Striker_Player_Score()
         {
             var service = new PlayerScoredService(CreateRandomService(3));
-            service.WhoScored(_team).Should().Be("ST 1");
+            var expected = _team.PlayingPlayers.Where(x => x.Position == Domain.Enums.PlayerPosition.Striker).OrderBy(x => x.Strength).Take(3).OrderBy(x => x.Name).FirstOrDefault().Name;
+            service.WhoScored(_team).Should().Be(expected);
         }
 
         private IRandomService CreateRandomService(int dice)

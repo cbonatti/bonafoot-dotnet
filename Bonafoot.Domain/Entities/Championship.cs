@@ -25,7 +25,7 @@ namespace Bonafoot.Domain.Entities
         {
             Year = DateTime.Now.Year;
             Status = ChampionshipStatus.Active;
-            ActualRound = 0;
+            ActualRound = 1;
             Divisions = new List<Division>()
             {
                 new Division(DivisionIndex.First),

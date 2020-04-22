@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { GameService } from './game/services/game.service';
 import { SquadComponent } from './squad/squad.component';
+import { MatchService } from './match/services/match.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { SquadComponent } from './squad/squad.component';
       { path: 'squad', component: SquadComponent },
     ])
   ],
-  providers: [GameService],
+  providers: [GameService, MatchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

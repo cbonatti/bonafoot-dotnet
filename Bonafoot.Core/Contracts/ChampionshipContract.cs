@@ -8,6 +8,7 @@ namespace Bonafoot.Core.Contracts
     public class ChampionshipContract
     {
         public int Year { get; set; }
+        public int ActualRound { get; set; }
         public DivisionContract First { get; set; }
         public DivisionContract Second { get; set; }
         public DivisionContract Third { get; set; }
@@ -21,6 +22,7 @@ namespace Bonafoot.Core.Contracts
             return new ChampionshipContract()
             {
                 Year = championship.Year,
+                ActualRound = championship.ActualRound,
                 First = GetDivision(championship, DivisionIndex.First),
                 Second = GetDivision(championship, DivisionIndex.Second),
                 Third = GetDivision(championship, DivisionIndex.Third),

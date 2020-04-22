@@ -19,6 +19,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadGames();
+  }
+
+  loadGames(): void {
     this.gameService.GetAll().subscribe(x => this.games = x, e => alert(e));
   }
 
@@ -30,10 +34,17 @@ export class HomeComponent implements OnInit {
     }, e => alert(e));
   }
 
-  loadGame(id): void {
-    this.gameService.Load(id).subscribe(x => {
+  loadGame(name: string): void {
+    this.gameService.Load(name).subscribe(x => {
       localStorage.setItem('game', JSON.stringify(x));
       this.route.navigate(['squad']);
+    }, e => alert(e));
+  }
+
+  deleteGame(name: string): void {
+    this.gameService.Delete(name).subscribe(x => {
+      localStorage.clear();
+      this.loadGames();
     }, e => alert(e));
   }
 }
