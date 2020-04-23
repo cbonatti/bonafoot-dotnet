@@ -1,10 +1,17 @@
+button {
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(90%);
+}
+
 .defaultButton {
     border: 0;
     border-radius: 8px;
     margin-right: 5px;
     margin-left: 5px;
     transition: filter 0.2s;
-    cursor: pointer;
 }
 
 .formationButton {
@@ -20,11 +27,6 @@
     font-size: 18px;
     line-height: 40px;
     transition: filter 0.2s;
-    cursor: pointer;
-}
-
-button:hover {
-    filter: brightness(90%);
 }
 
 .playButton {

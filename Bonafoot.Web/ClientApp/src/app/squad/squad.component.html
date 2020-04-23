@@ -28,13 +28,14 @@
     </div>
     <div class="col-sm-4">
         <fieldset>
-            <legend>{{team.division + 1}}{{getOrderSign(team.division + 1)}} division</legend>
+            <legend>{{team.division + 1}}{{util.getOrderSign(team.division + 1)}} division</legend>
+            <p>{{championship.actualRound}}{{util.getOrderSign(championship.actualRound)}} round</p>
             <table class="table table-hover table-striped table-borderless table-sm">
                 <tbody>
                     <tr *ngFor="let item of nextRound">
-                        <td>{{item.position}}{{getOrderSign(item.position)}}</td>
+                        <td>{{item.position}}{{util.getOrderSign(item.position)}}</td>
                         <td>{{item.name}}</td>
-                        <td>{{item.points}}</td>
+                        <td>{{item.points}}pts</td>
                     </tr>
                 </tbody>
             </table>
@@ -42,10 +43,11 @@
             <p>Money {{team.money}}</p>
         </fieldset>
         <div>
-            <div class="col-md-12"><button class="formationButton" [disabled]="!checkFormation([4, 4, 2])" (click)="formation([4, 4, 2])">4-4-2</button></div>
-            <div class="col-md-12"><button class="formationButton" [disabled]="!checkFormation([4, 3, 3])" (click)="formation([4, 3, 3])">4-3-3</button></div>
-            <div class="col-md-12"><button class="formationButton" [disabled]="!checkFormation([5, 3, 2])" (click)="formation([5, 3, 2])">5-3-2</button></div>
+            <div class="col-md-12"><button class="formationButton" [disabled]="!checkFormation([3, 4, 3])" (click)="formation([3, 4, 3])">3-4-3</button></div>
             <div class="col-md-12"><button class="formationButton" [disabled]="!checkFormation([3, 5, 2])" (click)="formation([3, 5, 2])">3-5-2</button></div>
+            <div class="col-md-12"><button class="formationButton" [disabled]="!checkFormation([4, 3, 3])" (click)="formation([4, 3, 3])">4-3-3</button></div>
+            <div class="col-md-12"><button class="formationButton" [disabled]="!checkFormation([4, 4, 2])" (click)="formation([4, 4, 2])">4-4-2</button></div>
+            <div class="col-md-12"><button class="formationButton" [disabled]="!checkFormation([5, 3, 2])" (click)="formation([5, 3, 2])">5-3-2</button></div>
         </div>
         <div class="col-md-12"><button [disabled]="!canPlay()" class="formationButton playButton" (click)="play()">PLAY!</button></div>
     </div>

@@ -1,47 +1,7 @@
 <h1>Bonafoot</h1>
-<p>{{round}} round</p>
+<p>{{round}}{{util.getOrderSign(round)}} round</p>
 <p><progress class="gameTime" max="90" [value]="minute"></progress> {{minute}}"</p>
-<fieldset>
-    <legend>First</legend>
-    <table class="gameTable">
-        <tr *ngFor="let match of first">
-            <td [style.background-color]="match.homeTeam.primaryColor" [style.color]="match.homeTeam.secondaryColor">{{match.homeTeam.name}}</td>
-            <td>{{match.homeTeamScore}} x {{match.guestTeamScore}}</td>
-            <td class="team" [style.background-color]="match.guestTeam.primaryColor" [style.color]="match.guestTeam.secondaryColor">{{match.guestTeam.name}}</td>
-            <td>{{match.playerScored}}</td>
-        </tr>
-    </table>
-</fieldset>
-<fieldset>
-    <legend>Second</legend>
-    <table class="gameTable">
-        <tr *ngFor="let match of second">
-            <td [style.background-color]="match.homeTeam.primaryColor" [style.color]="match.homeTeam.secondaryColor">{{match.homeTeam.name}}</td>
-            <td>{{match.homeTeamScore}} x {{match.guestTeamScore}}</td>
-            <td class="team" [style.background-color]="match.guestTeam.primaryColor" [style.color]="match.guestTeam.secondaryColor">{{match.guestTeam.name}}</td>
-            <td>{{match.playerScored}}</td>
-        </tr>
-    </table>
-</fieldset>
-<fieldset>
-    <legend>Third</legend>
-    <table class="gameTable">
-        <tr *ngFor="let match of third">
-            <td [style.background-color]="match.homeTeam.primaryColor" [style.color]="match.homeTeam.secondaryColor">{{match.homeTeam.name}}</td>
-            <td>{{match.homeTeamScore}} x {{match.guestTeamScore}}</td>
-            <td class="team" [style.background-color]="match.guestTeam.primaryColor" [style.color]="match.guestTeam.secondaryColor">{{match.guestTeam.name}}</td>
-            <td>{{match.playerScored}}</td>
-        </tr>
-    </table>
-</fieldset>
-<fieldset>
-    <legend>Fourth</legend>
-    <table class="gameTable">
-        <tr *ngFor="let match of fourth">
-            <td [style.background-color]="match.homeTeam.primaryColor" [style.color]="match.homeTeam.secondaryColor">{{match.homeTeam.name}}</td>
-            <td>{{match.homeTeamScore}} x {{match.guestTeamScore}}</td>
-            <td class="team" [style.background-color]="match.guestTeam.primaryColor" [style.color]="match.guestTeam.secondaryColor">{{match.guestTeam.name}}</td>
-            <td>{{match.playerScored}}</td>
-        </tr>
-    </table>
-</fieldset>
+<app-division-match [title]="'First'" [minute]="minute" [playingMatch]="first"></app-division-match>
+<app-division-match [title]="'Second'" [minute]="minute" [playingMatch]="second"></app-division-match>
+<app-division-match [title]="'Third'" [minute]="minute" [playingMatch]="third"></app-division-match>
+<app-division-match [title]="'Fourth'" [minute]="minute" [playingMatch]="fourth"></app-division-match>

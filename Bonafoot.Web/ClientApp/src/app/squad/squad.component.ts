@@ -9,6 +9,7 @@ import { ChampionshipModel } from '../game/models/championship.model';
 import { NextRoundModel } from './models/next-round.model';
 import { MatchService } from '../match/services/match.service';
 import { PlayMatchCommand } from '../match/commands/play-match-command.model';
+import { UtilService } from '../game/services/util.service';
 
 @Component({
     selector: 'app-squad',
@@ -21,7 +22,7 @@ export class SquadComponent implements OnInit {
     championship: ChampionshipModel;
     division: DivisionModel;
 
-    constructor(private gameService: GameService, private matchService: MatchService, private route: Router) {
+    constructor(private gameService: GameService, private matchService: MatchService, private util: UtilService, private route: Router) {
 
     }
 
@@ -37,36 +38,27 @@ export class SquadComponent implements OnInit {
     formation(positions: number[]): void {
         this.team.squad.forEach(x => x.select = false);
 
-        const gks = this.sortOrder(this.team.squad.filter(x => x.position === PlayerPosition.Goalkeeper).sort(x => x.strength), 'strength');
+        const gks = this.util.sortOrder(this.team.squad.filter(x => x.position === PlayerPosition.Goalkeeper), 'strength').reverse();
         gks[0].select = true;
 
-        const dfs = this.sortOrder(this.team.squad.filter(x => x.position === PlayerPosition.Defender), 'strength');
+        const dfs = this.util.sortOrder(this.team.squad.filter(x => x.position === PlayerPosition.Defender), 'strength').reverse();
         for (let i = 0; i < positions[0]; i++) {
             dfs[i].select = true;
         }
 
-        const mfs = this.sortOrder(this.team.squad.filter(x => x.position === PlayerPosition.Midfielder), 'strength');
+        const mfs = this.util.sortOrder(this.team.squad.filter(x => x.position === PlayerPosition.Midfielder), 'strength').reverse();
         for (let i = 0; i < positions[1]; i++) {
             mfs[i].select = true;
         }
 
-        const sts = this.sortOrder(this.team.squad.filter(x => x.position === PlayerPosition.Striker), 'strength');
+        const sts = this.util.sortOrder(this.team.squad.filter(x => x.position === PlayerPosition.Striker), 'strength').reverse();
         for (let i = 0; i < positions[2]; i++) {
             sts[i].select = true;
         }
     }
 
-    sortOrder(players: any[], prop: string): any[] {
-        players.sort(function(a, b) {
-            if (a[prop] < b[prop]) return -1;
-            if (b[prop] > a[prop]) return 1;
-            return 0;
-          });
-        return players.reverse();
-    }
-
     selectPlayer(player: PlayerModel): void {
-        let p = this.team.squad.find(x => x.id === player.id);
+        const p = this.team.squad.find(x => x.id === player.id);
         p.select = !p.select;
     }
 
@@ -110,7 +102,7 @@ export class SquadComponent implements OnInit {
     }
 
     getNextRound(teamId: string, round: number): NextRoundModel[] {
-        const sortedStanding = this.sortOrder(this.division.standing, 'points');
+        const sortedStanding = this.util.sortOrder(this.division.standing, 'points').reverse();
         const nextRound = this.division.rounds.find(x => (x.homeTeam.id == teamId || x.guestTeam.id == teamId) && x.round == round);
         const teamAgainstId = nextRound.homeTeam.id === teamId ? nextRound.guestTeam.id : nextRound.homeTeam.id;
 
@@ -120,7 +112,7 @@ export class SquadComponent implements OnInit {
         const playerTeamNextRound = new NextRoundModel(playerTeamStanding.team.name, sortedStanding.findIndex(x => x.team.id == teamId) + 1, playerTeamStanding.points);
         const teamAgainstNextRound = new NextRoundModel(teamAgainstStanding.team.name, sortedStanding.findIndex(x => x.team.id == teamAgainstId) + 1, teamAgainstStanding.points);
 
-        return this.sortOrder(new Array<NextRoundModel>(playerTeamNextRound, teamAgainstNextRound), 'position');
+        return this.util.sortOrder(new Array<NextRoundModel>(playerTeamNextRound, teamAgainstNextRound), 'position');
     }
 
     getPosition(pos: PlayerPosition): string {
@@ -135,19 +127,6 @@ export class SquadComponent implements OnInit {
                 return 'ST'
             default:
                 return '';
-        }
-    }
-
-    getOrderSign(order: number): string {
-        switch (order) {
-            case 1:
-                return 'st';
-            case 2:
-                return 'nd';
-            case 3:
-                return 'rd'
-            default:
-                return 'th'
         }
     }
 }

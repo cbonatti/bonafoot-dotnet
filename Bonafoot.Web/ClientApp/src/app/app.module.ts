@@ -10,6 +10,8 @@ import { GameService } from './game/services/game.service';
 import { SquadComponent } from './squad/squad.component';
 import { MatchService } from './match/services/match.service';
 import { MatchComponent } from './match/match.component';
+import { UtilService } from './game/services/util.service';
+import { DivisionMatchComponent } from './match/division-match/division-match.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { MatchComponent } from './match/match.component';
     HomeComponent,
     SquadComponent,
     MatchComponent,
+    DivisionMatchComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'bonafoot' }),
@@ -28,7 +31,7 @@ import { MatchComponent } from './match/match.component';
       { path: 'match', component: MatchComponent },
     ])
   ],
-  providers: [GameService, MatchService],
+  providers: [GameService, MatchService, UtilService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

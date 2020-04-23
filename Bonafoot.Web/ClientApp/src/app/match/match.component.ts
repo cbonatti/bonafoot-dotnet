@@ -6,6 +6,7 @@ import { PlayingMatchModel } from './model/playing-match.model';
 import { MatchModel } from '../game/models/match.model';
 import { ChampionshipRoundModel } from '../game/models/championship-round.model';
 import { ScoreModel } from '../game/models/score.model';
+import { UtilService } from '../game/services/util.service';
 
 @Component({
     selector: 'app-match',
@@ -22,7 +23,7 @@ export class MatchComponent implements OnInit {
     minute = 0;
     round: number;
 
-    constructor(private route: Router) {
+    constructor(private route: Router, private util: UtilService) {
 
     }
 
@@ -52,32 +53,13 @@ export class MatchComponent implements OnInit {
     }
 
     gameFlowControl() {
-        this.minuteChange();
+        this.minute++;
 
         if (this.minute === 90)
             return;
-            
+
         setTimeout(() => {
             this.gameFlowControl();
         }, 250);
-    }
-
-    minuteChange() {
-        this.minute++;
-
-        this.gameChange(this.first);
-        this.gameChange(this.second);
-        this.gameChange(this.third);
-        this.gameChange(this.fourth);
-    }
-
-    gameChange(matches: PlayingMatchModel[]) {
-        matches.forEach(x => {
-            const minute = x.scores.find(x => x.minute == this.minute);
-            if (minute) {
-                minute.home ? x.homeTeamScore++ : x.guestTeamScore++;
-                x.playerScored = this.minute + '" ' + minute.name;
-            }
-        });
     }
 }
