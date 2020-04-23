@@ -1,0 +1,19 @@
+<h1>Bonafoot</h1>
+<p>{{round}}{{util.getOrderSign(round)}} round</p>
+<div class="row">
+    <div class="col-md-6">
+        <app-division-standing [title]="'First'" [standing]="first"></app-division-standing>
+    </div>
+    <div class="col-md-6">
+        <app-division-standing [title]="'Second'" [standing]="second"></app-division-standing>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <app-division-standing [title]="'Third'" [standing]="third"></app-division-standing>
+    </div>
+    <div class="col-md-6">
+        <app-division-standing [title]="'Fourth'" [standing]="fourth"></app-division-standing>
+    </div>
+</div>
+<button class="defaultButton" (click)="next()">Go to Squad</button>

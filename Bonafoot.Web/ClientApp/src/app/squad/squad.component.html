@@ -30,7 +30,7 @@
         <fieldset>
             <legend>{{team.division + 1}}{{util.getOrderSign(team.division + 1)}} division</legend>
             <p>{{championship.actualRound}}{{util.getOrderSign(championship.actualRound)}} round</p>
-            <table class="table table-hover table-striped table-borderless table-sm">
+            <table class="table table-hover table-striped table-borderless table-sm" (click)="toStandig()" title="Go to Standing">
                 <tbody>
                     <tr *ngFor="let item of nextRound">
                         <td>{{item.position}}{{util.getOrderSign(item.position)}}</td>

@@ -1,6 +1,7 @@
 <h1>Bonafoot</h1>
 <p>{{round}}{{util.getOrderSign(round)}} round</p>
-<p><progress class="gameTime" max="90" [value]="minute"></progress> {{minute}}"</p>
+<button class="defaultButton" *ngIf="minute === 90" (click)="next()">Next</button>
+<p *ngIf="minute !== 90"><progress class="gameTime" max="90" [value]="minute"></progress> {{minute}}"</p>
 <app-division-match [title]="'First'" [minute]="minute" [playingMatch]="first"></app-division-match>
 <app-division-match [title]="'Second'" [minute]="minute" [playingMatch]="second"></app-division-match>
 <app-division-match [title]="'Third'" [minute]="minute" [playingMatch]="third"></app-division-match>

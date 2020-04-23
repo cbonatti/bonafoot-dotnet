@@ -33,6 +33,11 @@ export class SquadComponent implements OnInit {
         this.championship = this.game.championship;
         this.division = this.getDivision(this.game.team.division);
         this.nextRound = this.getNextRound(this.game.team.id, this.championship.actualRound);
+        this.clearTeamSelect();
+    }
+
+    clearTeamSelect() {
+        this.team.squad.map(x => x.select = false);
     }
 
     formation(positions: number[]): void {
@@ -128,5 +133,9 @@ export class SquadComponent implements OnInit {
             default:
                 return '';
         }
+    }
+
+    toStandig() {
+        this.route.navigate(['standing']);
     }
 }

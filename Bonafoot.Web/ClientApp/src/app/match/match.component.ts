@@ -60,6 +60,10 @@ export class MatchComponent implements OnInit {
 
         setTimeout(() => {
             this.gameFlowControl();
-        }, 250);
+        }, 100);
+    }
+
+    next() {
+        this.route.navigate(['standing'])
     }
 }
