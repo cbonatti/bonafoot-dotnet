@@ -15,6 +15,6 @@ namespace Bonafoot.Engine
         public Team HomeTeam { get; private set; }
         public Team GuestTeam { get; private set; }
 
-        public MatchResult Play(IRandomService service) => new MatchEngine(new PlayerScoredService(service), new CombatService(service)).PlayGame(this);
+        public MatchResult Play(IRandomService service) => new MatchEngine(new PlayerScoredService(service), new CombatService(service), service).PlayGame(this);
     }
 }

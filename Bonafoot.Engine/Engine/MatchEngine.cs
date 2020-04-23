@@ -10,13 +10,15 @@ namespace Bonafoot.Engine
         private int _minute;
         private readonly IPlayerScoredService _playerScoredService;
         private readonly ICombatService _combatService;
+        private readonly IRandomService _randomService;
 
         public BallPosition BallPosition { get; private set; } = BallPosition.Center;
 
-        public MatchEngine(IPlayerScoredService playerScoredService, ICombatService combatService)
+        public MatchEngine(IPlayerScoredService playerScoredService, ICombatService combatService, IRandomService randomService)
         {
             _playerScoredService = playerScoredService;
             _combatService = combatService;
+            _randomService = randomService;
         }
 
         public MatchEngine SetMatch(Match match)
@@ -31,14 +33,21 @@ namespace Bonafoot.Engine
             BallPosition = BallPosition.Center;
 
             for (_minute = 0; _minute <= 90; _minute++)
-                for (int play = 0; play < 3; play++) // 3 plays per minute
-                    Play(); 
+            {
+                if (_minute == 45)
+                    BallPosition = BallPosition.Center;
+                for (int play = 0; play < 2; play++) // 2 plays per minute
+                    Play();
+            }
 
             return Result;
         }
 
         private void Play()
         {
+            if (!Advance())
+                return;
+
             switch (BallPosition)
             {
                 case BallPosition.HomeDef:
@@ -118,6 +127,12 @@ namespace Bonafoot.Engine
             }
             else
                 BallPosition = BallPosition.HomeMid;
+        }
+
+        private bool Advance()
+        {
+            var result = _randomService.Dice() + _randomService.Dice();
+            return result > MatchConfig.PARAMETER_ADVANCE;
         }
     }
 }

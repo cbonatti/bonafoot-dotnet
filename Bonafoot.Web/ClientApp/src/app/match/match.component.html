@@ -6,3 +6,4 @@
 <app-division-match [title]="'Second'" [minute]="minute" [playingMatch]="second"></app-division-match>
 <app-division-match [title]="'Third'" [minute]="minute" [playingMatch]="third"></app-division-match>
 <app-division-match [title]="'Fourth'" [minute]="minute" [playingMatch]="fourth"></app-division-match>
+<button class="defaultButton" *ngIf="minute === 90" (click)="next()">Next</button>
