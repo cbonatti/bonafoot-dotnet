@@ -64,7 +64,7 @@ namespace Bonafoot.Domain.Entities
         // TODO: Should I extract this methods (AddRound, GenerateRounds, GenerateReturnRounds) to another class? Or generating rounds is championship obligation?
         private bool AddRound(Team home, Team guest, int round, DivisionIndex division)
         {
-            if (Rounds.Any(x => (x.HomeTeam.Id == home.Id && x.GuestTeam.Id == guest.Id) || (x.GuestTeam.Id == home.Id && x.HomeTeam.Id == guest.Id)))
+            if (Rounds.Where(x => x.Round == round && x.Division == division).Any(x => (x.HomeTeam.Id == home.Id || x.GuestTeam.Id == guest.Id) || (x.GuestTeam.Id == home.Id || x.HomeTeam.Id == guest.Id)))
                 return false;
             Rounds.Add(new ChampionshipRound(round, home, guest, division));
             return true;
@@ -76,12 +76,12 @@ namespace Bonafoot.Domain.Entities
             {
                 for (int team = 0; team < 8; team++)
                 {
-                    int round = 1;
                     for (int teamAgainst = 0; teamAgainst < 8; teamAgainst++)
                     {
+                        int round = 1;
                         if (team != teamAgainst)
                         {
-                            if (AddRound(division.Teams.ElementAt(team), division.Teams.ElementAt(teamAgainst), round, division.Index))
+                            while (!AddRound(division.Teams.ElementAt(team), division.Teams.ElementAt(teamAgainst), round, division.Index) && round < 7)
                                 round++;
                         }
                     }
