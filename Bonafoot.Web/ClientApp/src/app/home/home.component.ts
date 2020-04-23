@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    document.querySelectorAll("body").forEach(x => x.style.backgroundColor = '#2FAA61')
     this.loadGames();
   }
 

@@ -44,3 +44,12 @@ export class MatchService {
 
 }
 
+/*
+
+
+criar pagina com os jogos "em tempo real"
+depois exibir pagina com a classificacao
+depois voltar para a tela do time 
+
+
+*/

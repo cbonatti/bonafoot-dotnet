@@ -83,6 +83,7 @@ export class SquadComponent implements OnInit {
             this.game.championship = x;
             this.championship = x;
             localStorage.setItem('game', JSON.stringify(this.game));
+            this.route.navigate(['match']);
         }, x => alert(x));
     }
 

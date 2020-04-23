@@ -9,12 +9,14 @@ import { HomeComponent } from './home/home.component';
 import { GameService } from './game/services/game.service';
 import { SquadComponent } from './squad/squad.component';
 import { MatchService } from './match/services/match.service';
+import { MatchComponent } from './match/match.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SquadComponent,
+    MatchComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'bonafoot' }),
@@ -23,6 +25,7 @@ import { MatchService } from './match/services/match.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'squad', component: SquadComponent },
+      { path: 'match', component: MatchComponent },
     ])
   ],
   providers: [GameService, MatchService],
