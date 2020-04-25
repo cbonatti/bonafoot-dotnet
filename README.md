@@ -1,5 +1,30 @@
 # bonafoot-dotnet
-Soccer game based on Elifoot
+Soccer game based on Elifoot (http://www.elifoot.com/)  
+Teams and players are automatically generated with generic names and colors.  
+![Bonafoot](https://github.com/cbonatti/bonafoot-dotnet/blob/master/bonafoot.gif)  
+
+### Getting Started
+- You will need a MongoDb instance running
+- Your appsettings.json should be like this:
+<pre>
+{
+  "MongoDB": {
+    "Database": "YOUR_DATABASE",
+    "Host": "YOUR_HOST",
+    "Port": 0,
+    "User": "YOUR_USER",
+    "Password": "YOUR_PASSWORD"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*"
+}
+</pre>
 
 ### Game Field  
 <pre>
