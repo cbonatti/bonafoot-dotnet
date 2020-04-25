@@ -6,7 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-appsettings.json
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -229,3 +229,6 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+Bonafoot.Web/appsettings.json
+/Bonafoot.Web/appsettings.json
