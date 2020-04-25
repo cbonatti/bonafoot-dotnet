@@ -231,4 +231,6 @@ _Pvt_Extensions
 .fake/
 
 Bonafoot.Web/appsettings.json
+Bonafoot.Web/appsettings.Development.json
 /Bonafoot.Web/appsettings.json
+/Bonafoot.Web/appsettings.Development.json
