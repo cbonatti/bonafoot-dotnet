@@ -22,6 +22,7 @@ namespace Bonafoot.Engine.Tests
         {
             _randomService = Substitute.For<IRandomService>();
             _randomService.Generate(0, 0).ReturnsForAnyArgs(0);
+            _randomService.Dice().Returns(5);
 
             _combatService = new CombatService(_randomService);
             _playerScoredService = Substitute.For<IPlayerScoredService>();
