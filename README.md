@@ -67,4 +67,27 @@ The average strength of strickers players of attacking team and goalkeeper playe
 - Goalkeeper is greater => Ball move to Midfield
 - They are equal => Ball stays at Defense
 
-**For each Combat(Home vs Guest team) a factor is applyied to players strength to force results not to be the same**
+**For each Combat(Home vs Guest team) a factor is applyied to players strength to force results not to be the same**  
+
+# What's next
+
+### Usability  
+- Create real life Teams and Players
+- Create detail when click a player
+  - salary
+  - goals scored
+  - sell player
+- Create player search
+- Manage stadium capacity
+- Create a top menu
+
+### Game Engine
+- "Artificial Intelligence" sell and buy players after each game
+- A.I. fire a coach and hire a new one
+- Team moral affect players
+- Decrease players' salary from team amount after every game
+- Players that played a game has a chance to decrease by 1 his strength
+- Players that don't played a game has a chance to increase by 1 his strength
+- Stadium attendance following home team's moral
+- Prize to first division winner at championship end
+- Prize to top scorer player
